@@ -43,10 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="APriori.cs" />
     <Compile Include="CleanDataPoint.cs" />
     <Compile Include="KMeans.cs" />
-    <Compile Include="OS.cs" />
-    <Compile Include="OS_2.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
