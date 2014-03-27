@@ -10,9 +10,10 @@ namespace IndividualAssignment
     {
         
         //The TRANSACTIONS 2-dimensional array holds the full data set for the lab
-         
-        //static int[][] TRANSACTIONS = new int[][] { { 1, 2, 3, 4, 5 }, { 1, 3, 5 }, { 2, 3, 5 }, { 1, 5 }, { 1, 3, 4 }, { 2, 3, 5 }, { 2, 3, 5 },
-        //              { 3, 4, 5 }, { 4, 5 }, { 2 }, { 2, 3 }, { 2, 3, 4 }, { 3, 4, 5 } };
+
+        public static List<List<int>> TRANSACTIONS = new List<List<int>>() { new List<int>(){ 1, 2, 3, 4, 5 }, new List<int>(){ 1, 3, 5 }, new List<int>(){ 2, 3, 5 }, 
+                        new List<int>(){ 1, 5 }, new List<int>(){ 1, 3, 4 }, new List<int>(){ 2, 3, 5 }, new List<int>(){ 2, 3, 5 }, new List<int>(){ 3, 4, 5 }, 
+                        new List<int>(){ 4, 5 }, new List<int>(){ 2 }, new List<int>(){ 2, 3 }, new List<int>(){ 2, 3, 4 }, new List<int>(){ 3, 4, 5 } };
 
         public static void RunAPriori(float supportPercentageThreshold, List<List<int>> data)
         {
@@ -28,6 +29,7 @@ namespace IndividualAssignment
 
             //generate Frequent Item Sets for level 1
             Dictionary<int[], int> freqSets = GenerateFrequentItemSetsLevel1(data, supportThreshold);
+            WriteItemSets(freqSets);
 
             freqSets = Sort(freqSets);
             for (int k = 1; freqSets.Count > 0; k++)
@@ -36,6 +38,20 @@ namespace IndividualAssignment
                 
             }
 
+        }
+
+        private static void WriteItemSets(Dictionary<int[], int> freqSets)
+        {
+            foreach (int[] itemSet in freqSets.Keys)
+            {
+                Console.Write("Set: [");
+                foreach (int i in itemSet)
+                {
+                    Console.Write(i + ", ");
+                }
+                Console.WriteLine("] Count: {0}", freqSets[itemSet]);
+            }
+            //freqSets.Keys.ToList().ForEach(e => Console.WriteLine(string.Format("Set {1}, count {0}", freqSets[e], e.ToString())));
         }
 
         private static Dictionary<int[], int> Sort(Dictionary<int[], int> freqSets)
@@ -62,6 +78,7 @@ namespace IndividualAssignment
             throw new NotImplementedException();
         }
 
+        //Working with k-1 sets
         private static List<int[]> Join(Dictionary<int[], int> freqSets)
         {
             List<int[]> kMinusOneList = new List<int[]>(freqSets.Keys);
@@ -74,7 +91,7 @@ namespace IndividualAssignment
                 {
                     if(kMinusPoint.Take(kMinusPoint.Length-1).SequenceEqual(comp.Take(kMinusPoint.Length-1)))
                     {
-                        candidates.Add(kMinusPoint.Join(comp, (e => e),(e=> e),(e1,e2) => e1).ToArray());
+                        if(comp.Last() > kMinusPoint.Last()) candidates.Add(kMinusPoint.Union(comp).ToArray());
                     }
                 }
             }
@@ -82,6 +99,7 @@ namespace IndividualAssignment
             return candidates;
         }
 
+        //working
         private static Dictionary<int[], int> GenerateFrequentItemSetsLevel1(IEnumerable<List<int>> data, int supportThreshold)
         {
             Dictionary<int[], int> freqItems = new Dictionary<int[], int>();
@@ -91,10 +109,10 @@ namespace IndividualAssignment
             {
                 foreach (int i in list)
                 {
-                    List<int> num = new List<int>(1);
-                    int[] thisNum = num.ToArray();
 
-                    int[] exists = freqItems.Keys.First(e => e.SequenceEqual(thisNum));
+                    int[] thisNum = new[]{i};
+
+                    int[] exists = freqItems.Keys.FirstOrDefault(e => e.SequenceEqual(thisNum));
 
                     if (exists != null)
                     {
@@ -107,7 +125,8 @@ namespace IndividualAssignment
                 }
             }
             //Exclude any values below the support threshold
-            freqItems = (Dictionary<int[], int>) freqItems.Where(p => p.Value >= supportThreshold);
+            freqItems = freqItems.Where(p => p.Value >= supportThreshold).ToDictionary((e => e.Key),(e => e.Value));
+            //freqItems = (Dictionary<int[], int>) 
 
  
             return freqItems;

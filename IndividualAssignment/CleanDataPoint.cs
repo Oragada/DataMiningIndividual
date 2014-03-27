@@ -239,6 +239,7 @@ namespace IndividualAssignment
             {
                 val = 1;
             }
+            return val;
 
         }
 
@@ -362,6 +363,7 @@ namespace IndividualAssignment
                 }
                 progLangs[i] = GetProgLang(langs[i]);
             }
+            return progLangs;
         }
 
         private static ProgrammingLanguage GetProgLang(string s)
@@ -429,7 +431,7 @@ namespace IndividualAssignment
             }
             double num = Convert.ToDouble(number);
             if (addHalf){ num += 0.5; }
-            return num;
+            return Convert.ToInt32(num);
         }
 
         private static int CleanProgSkill(string s)

@@ -7,7 +7,7 @@ using System.IO;
 namespace IndividualAssignment
 {
     class Program
-    {
+    { /*
         static void Main(string[] args)
         {
             List<string[]> data = new List<string[]>();
@@ -34,6 +34,10 @@ namespace IndividualAssignment
 
             List<CleanDataPoint> cleanData = data.Select(CleanDataPoint.Clean).ToList();
 
+        }*/
+        static void Main(string[] args)
+        {
+            APriori.RunAPriori(0.1f,APriori.TRANSACTIONS);
         }
     }
 }
