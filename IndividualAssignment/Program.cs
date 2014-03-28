@@ -37,7 +37,7 @@ namespace IndividualAssignment
         }*/
         static void Main(string[] args)
         {
-            APriori.RunAPriori(0.1f,APriori.TRANSACTIONS);
+            Dictionary<KeyValuePair<int[], int[]>, float> results = APriori.RunAPriori(0.2f, 0.60f,APriori.TRANSACTIONS);
         }
     }
 }
