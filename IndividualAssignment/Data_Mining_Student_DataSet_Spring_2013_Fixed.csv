@@ -1,8 +1,8 @@
 ï»¿age;DOB;prog_skill;yrs_of_uni_study;operating_system;prog_languages;english_level;animal;more_dk_mnts;winter_tired;rand_num_1_10;rand_num_0_1;rand_num_0_1_again;canteen_food;fav_colour;neural_network_vector_machine;sql;sql_server;A_Priori;44523673_sqrt;noor_hometown;therb_fortt_glag;solar_system_planets;num_sequence;seq_name;
-25;30/08/87;7;½;Windows;C#, Java(Javascript);64;Elephant;No;No;8;0,3;0,4;Average;Blue;No,No;Yes;MS SQL;Nope;No idea;Sorry, dunno;-;-;55;Fibonachi's sequence
+25;30/08/87;7;Â½;Windows;C#, Java(Javascript);64;Elephant;No;No;8;0,3;0,4;Average;Blue;No,No;Yes;MS SQL;Nope;No idea;Sorry, dunno;-;-;55;Fibonachi's sequence
 23;07/01/1989;9;4;Windows;C++,F#,C#;65;Asparagus;Yes;No;8;0,0347532;0,1043027301879981101;Expensive;Black;No;Yes;The standard one?;No;a number;No idea;Wat;9;55;addition scale
-26;23/11 - 86;6;6;Windows;C#, SQL, Python;62;Elephant;no;no;7,5;½;½;great, but expensive;bamboo;no;yes;MS;no, but i know what 'a priori' is;SQRT(44523675);Syrian village;Snails;7;55;fibonacci
-26;18/3/1986;7;4½;Windows;C#, Objective-C, Java;59;Elephant;YES;YES;8;0,5;0,6;It's mediocre;Blue;No!;YES;MS SQL;No;SQRT(44523673);Copenhagen;?;8;55;fibonacci?
+26;23/11 - 86;6;6;Windows;C#, SQL, Python;62;Elephant;no;no;7,5;Â½;Â½;great, but expensive;bamboo;no;yes;MS;no, but i know what 'a priori' is;SQRT(44523675);Syrian village;Snails;7;55;fibonacci
+26;18/3/1986;7;4Â½;Windows;C#, Objective-C, Java;59;Elephant;YES;YES;8;0,5;0,6;It's mediocre;Blue;No!;YES;MS SQL;No;SQRT(44523673);Copenhagen;?;8;55;fibonacci?
 49;25 june;8;0;windows;C #, VB, Pascal;60;Elephant;yes;yes;7;1,5;1,25;ok;Green;No;yes;MS-SQL;No;-;?;?;12;55;-;
 38;23 sep. 1974;8;6;Linux;Java, C#, Scala;65;Elephant;Yes!;Yes;10;0,0156531268;0,7137615;a bit expensive;blue;no;yes;DB2;no;Something smaller;Damascus?;?;13;55;fibonacci
 41;27-10-71;5;4;Windows;Java, Lisp, C++;67;Zebra;Yes;No;7;1;0;ok;Blue;No;Yes;My SQL;No; SQRT(44523673) :-);Damascus;fortt!;7;21;Fibonacci?
@@ -26,11 +26,11 @@
 26;030586;6;5;OSX;python,java,c++;68;Elephant;yes;no;8;0,5;-;good;blue;yes;yes;DB2;yes;-;somewhere nice;bus;enough;55;Fibo
 25;29.12.1987;6;6;Windows 7;Python, Prolog, C;60;Zebra;Yes, of course;You have no idea!!! (yes);7;0,314;0,762;Really tasty!;I don't have one;No;Yes a little bit;-;No;-;I don't know;what?;9;55;Fibonacci Sequence
 21;18/12 1991;9;2,5;MAC OSX;C#, F#, Java;-;Zebra;No;Yes;3;0,1337;0,23;Too expensive;Blue;Yes;Yes;MySQL;No;Don't know; Dont't know;?;6;55;Fibonacci
-21;180291;7;2½;Windows 7;C#, C, F#;68;Elephant;No;YES;7;0.18;0.90;AVERAGE;BLACK;YES;YES;MYSQL;NO;Don't know;No idea;?;6;55;Fibonacci
+21;180291;7;2Â½;Windows 7;C#, C, F#;68;Elephant;No;YES;7;0.18;0.90;AVERAGE;BLACK;YES;YES;MYSQL;NO;Don't know;No idea;?;6;55;Fibonacci
 21;August 1st;6;2.5;Windows 7;C# C F#;65;Asparagus;No;No;7;0,117;0,1337;Okay;Green;Heard of them, but no;Yes;None;No;6672.606;\(._.)/;The hell?;8. Pluto isn't a planet;55;Fibonacci (or something like that)
 31;21/9-81;6;2;Windows;C++,Java,;60;Elephant;No;No;4;0,319;0,75423;Ok;Blue;Yes;Yes;MySQL;No;-;Somewhere in Syria;Fish;8;55;-
 -;04-10-1991;7;2.5;Windows;C#, Java, C;65;Zebra;No;No;7;0,769563218754;0,000000000000000001;-Blank-;Black;Yes and no;Yes;MSSQL 2008 122;No;circa 6672;E(Syria Towns);-Blank;Billions (which solar system?);55;Fibbonnaci
-28;15-06-1984;5;½;Windows 7;Java, C#, Ruby;64;ELEPHANT;Yes;No;4;0.15;0.74;Good;Blue;No;Yes;Oracle XE;No;SQRT(44523673);Damascus;therb;9;55;Sequence Of The Deep Sea
+28;15-06-1984;5;Â½;Windows 7;Java, C#, Ruby;64;ELEPHANT;Yes;No;4;0.15;0.74;Good;Blue;No;Yes;Oracle XE;No;SQRT(44523673);Damascus;therb;9;55;Sequence Of The Deep Sea
 25;15. Feb. 1987;7;3;MAC OSX;Python, C#, Java;58;Elephant;No;No;6;0,2561477;0,87124567;It's below standard;GReen;No;Yes;MySQL;No;42;Some town in Syria;??;7;55;Fibonnachi Sequence
 24;12. December 1988;7;3;Mac OSX;Python, Obj-C, F#;%;Zebra. 3 is only good with bacon;No;Yes. Basically Danish weather in general;4;0.5;0.7;Bad;%;y/n;Yes;MySQL; Nope... but sounds familiar;dafuq?;Somewhere in Syria;Shweb ka lend!;8 (used to be 9);55;Fibonacci
 23;07.09.1989;7;4;Windows;Java, C#, C++;50;Only two of them are animals, from which I like more the Zebra.;No;Yes;7;0.5;1;I never eat from the canteen;Purple;No;Yes;MySQL;No;-;-;-;8 planets;55;It's a Fibonacci sequence

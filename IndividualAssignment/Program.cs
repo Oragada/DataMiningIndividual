@@ -7,7 +7,7 @@ using System.IO;
 namespace IndividualAssignment
 {
     class Program
-    { /*
+    { 
         static void Main(string[] args)
         {
             List<string[]> data = new List<string[]>();
@@ -20,7 +20,7 @@ namespace IndividualAssignment
                 string line = reader.ReadLine();
                 string[] values = line.Split(';');
                 //If there is not the required number of fields, the data point is discarded
-                if (values.Length != 26) continue; 
+                if (values.Length != 25) continue; 
                 data.Add(values.Take(25).ToArray());
 
             }
@@ -30,14 +30,30 @@ namespace IndividualAssignment
             //    Console.WriteLine(stringse[17]);
             //}
 
-            Console.ReadKey();
-
             List<CleanDataPoint> cleanData = data.Select(CleanDataPoint.Clean).ToList();
 
-        }*/
-        static void Main(string[] args)
+            Analysis ana = new Analysis();
+
+            ana.RunAPriori(cleanData);
+
+            PrintData(cleanData);
+
+            Console.ReadKey();
+
+        }
+
+        private static void PrintData(List<CleanDataPoint> cleanData)
+        {
+            foreach (CleanDataPoint cleanDataPoint in cleanData)
+            {
+                Console.Write("{0}, {1}, {2}", cleanDataPoint.ProgLang[0], cleanDataPoint.ProgLang[1], cleanDataPoint.ProgLang[2]);
+                Console.WriteLine();
+            }
+        }
+
+        /*static void Main(string[] args)
         {
             Dictionary<KeyValuePair<int[], int[]>, float> results = APriori.RunAPriori(0.2f, 0.60f,APriori.TRANSACTIONS);
-        }
+        }*/
     }
 }

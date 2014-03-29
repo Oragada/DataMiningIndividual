@@ -5,7 +5,7 @@ using System.Text;
 
 namespace IndividualAssignment
 {
-    class CleanDataPoint
+    public class CleanDataPoint
     {
         public int Age { get; private set; }
         public DateTime Birth { get; private set; }
@@ -91,7 +91,7 @@ namespace IndividualAssignment
 
         private static int CleanPlanets(string s)
         {
-            string[] words = s.Split(' ', '-');
+            string[] words = s.Split(' ', '.', '-');
             string[] numWords =
                 words.Where(
                     e =>
@@ -196,7 +196,7 @@ namespace IndividualAssignment
         private static Colour CleanColour(string s)
         {
             Colour c;
-            if (Colour.TryParse(s, false, out c))
+            if (Colour.TryParse(s, true, out c))
             {
                 return c;
             }
@@ -228,6 +228,8 @@ namespace IndividualAssignment
                 //Fuck this guy
                 return 1;
             }
+
+            if (s == "-") { return 1; }
 
             s = s.Replace(',', '.');
 
@@ -299,7 +301,7 @@ namespace IndividualAssignment
             
 
             //covers answers of "no" and "not"
-            if (s.Contains(" no"))
+            if (s.Contains("no"))
             {
                 return false;
             }
@@ -339,10 +341,16 @@ namespace IndividualAssignment
         {
             //45-69
 
+            //If no or incoherent answer, assume too low English skill to understand the question
+            if (s == "-" || s == "%")
+            {
+                return 45;
+            }
+
             //Conversion. All decimals are dropped
             int value = Convert.ToInt32(s.Split(',').First());
 
-            //If people have written something outside the given range, I assume their english skills are so bad, that they were not able to read the instructions
+            //If people have written something outside the given range, I assume their English skills are so bad, that they were not able to read the instructions
             if (value < 45 || value > 69)
             {
                 value = 45;
@@ -352,7 +360,7 @@ namespace IndividualAssignment
 
         private static ProgrammingLanguage[] CleanProgLang(string s)
         {
-            string[] langs = s.Split(' ', ',', '(', ')');
+            string[] langs = s.Split(' ', ',', '(', ')').Where(e => e.Length>0).ToArray();
 
             ProgrammingLanguage[] progLangs = new ProgrammingLanguage[3];
             for (int i = 0; i < 3; i++)
@@ -361,7 +369,11 @@ namespace IndividualAssignment
                 {
                     progLangs[i] = ProgrammingLanguage.UnknownProgrammingLanguage;
                 }
-                progLangs[i] = GetProgLang(langs[i]);
+                else
+                {
+                    progLangs[i] = GetProgLang(langs[i]);
+                }
+                
             }
             return progLangs;
         }
@@ -429,7 +441,7 @@ namespace IndividualAssignment
                 number = number.Substring(0, number.Length - 1);
                 addHalf = true;
             }
-            double num = Convert.ToDouble(number);
+            double num = (number.Length == 0 ? 0 : Convert.ToDouble(number));
             if (addHalf){ num += 0.5; }
             return Convert.ToInt32(num);
         }
@@ -442,10 +454,28 @@ namespace IndividualAssignment
         private static DateTime CleanBirth(string s)
         {
             char[] splitters = new[]{'-','.',' ', '/'};
-            string[] dates = s.Split(splitters);
+            string[] dates = s.Split(splitters).Where(e => e.Length != 0).ToArray();
 
             //if month is written as text
             dates = ConvertTextMonthToNum(dates);
+
+            //if no year is given
+            if (dates.Length == 2)
+            {
+                dates = new[]{dates[0], dates[1], "2000"};
+            }
+
+            //if date is written as six numbers without seperators
+            if (dates[0].Length == 6)
+            {
+                dates = new[] {dates[0].Substring(0, 2), dates[0].Substring(2, 2), dates[0].Substring(4, 2)};
+            }
+
+            //special case
+            if (dates[0] == "1st")
+            {
+                dates[0] = "01";
+            }
             
             //if the format is year-month-day
             if (dates[0].Length > 2)
@@ -455,9 +485,11 @@ namespace IndividualAssignment
                 dates[2] = temp;
             }
 
-            DateTime dt = new DateTime(2000, Convert.ToInt32(dates[1]), Convert.ToInt32(dates[0]));
 
-            throw new NotImplementedException();
+
+            return new DateTime(2000, Convert.ToInt32(dates[1]), Convert.ToInt32(dates[0]));
+            //return 
+            //throw new NotImplementedException();
         }
 
         private static int CleanAge(string s)
@@ -502,17 +534,21 @@ namespace IndividualAssignment
             for (int i = 0; i < dates.Length; i++)
             {
                 string text = dates[i];
-                string tm = textMonth[text.Substring(0, 3)];
-                if (tm != null)
+                if(text.Length > 2)
                 {
-                    //if month is not in the correct position, it is swapped with where the month was found
-                    if (i != 1)
+                    if(textMonth.ContainsKey(text.Substring(0,3)))
                     {
-                        string temp = dates[i];
-                        dates[i] = dates[1];
-                        dates[1] = temp;
+                        string tm = textMonth[text.Substring(0, 3)];
+                        //if month is not in the correct position, it is swapped with where the month was found
+                        if (i != 1)
+                        {
+                            string temp = dates[i];
+                            dates[i] = dates[1];
+                            dates[1] = temp;
+                        }
+                        dates[1] = tm;
                     }
-                    dates[1] = tm;
+                    
                 }
             }
 
@@ -522,27 +558,27 @@ namespace IndividualAssignment
         #endregion
     }
 
-    internal enum SQL
+    public enum SQL
     {
         MySQL, MS_SQL, Oracle, Postgres, DB2, Other
     }
 
-    internal enum Colour
+    public enum Colour
     {
         Red, Purple, Blue, Green, Yellow, Orange, White, Grey, Black, Other
     }
 
-    internal enum Animal
+    public enum Animal
     {
         Zebra, Elephant, Asparagus, Other
     }
 
-    internal enum OS
+    public enum OS
     {
         Windows, Linux, OSX, Unknown
     }
 
-    internal enum ProgrammingLanguage
+    public enum ProgrammingLanguage
     {
         CSharp,
         FSharp,

@@ -28,7 +28,7 @@ namespace IndividualAssignment
         {
             //generate Frequent Item Sets for level 1
             Dictionary<int[], int> freqSets = GenerateFrequentItemSetsLevel1(data, supportThreshold);
-            WriteItemSets(freqSets);
+            //WriteItemSets(freqSets);
 
             freqSets = Sort(freqSets);
             for (int k = 2; freqSets.Count > 0; k++)
@@ -54,12 +54,12 @@ namespace IndividualAssignment
                     float confidenceVal = (confIS / ((float)freqSets[subset]));
                     if (confidenceVal >= confidenceThreshold)
                     {
-                        WriteAssoRule(subset, itemset, confidenceVal);
-                        AssocRules.Add(new KeyValuePair<int[], int[]>(itemset, subset), confidenceVal);
+                        //WriteAssoRule(subset, itemset, confidenceVal);
+                        AssocRules.Add(new KeyValuePair<int[], int[]>(subset, itemset.Where(e => !subset.Contains(e)).ToArray()), confidenceVal);
                     }
                 }
             }
-            Console.ReadLine();
+            //Console.ReadLine();
 
             return AssocRules;
             //return something useful
