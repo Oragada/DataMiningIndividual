@@ -82,7 +82,7 @@ namespace IndividualAssignment
     public enum CandidateAttribute{ None }
 
     public enum ClassLabel {
-        One, Two
+        True, False
     }
 
     //Based on 'NTree' implemented by Aaron Gage:

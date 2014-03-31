@@ -9,23 +9,23 @@ namespace IndividualAssignment
     {
         public static Dictionary<Field[], ClassLabel> Training = new Dictionary<Field[], ClassLabel>
             {
-                {(new Field[] {new NumericField(0.3), new NumericField(0.5), new NumericField(0.1), new NominalField(4)}), ClassLabel.One},
-                {(new Field[] {new NumericField(0.7), new NumericField(0.2), new NumericField(0.7), new NominalField(4)}), ClassLabel.One},
-                {(new Field[] {new NumericField(0.1), new NumericField(0.4), new NumericField(0.2), new NominalField(8)}), ClassLabel.Two},
-                {(new Field[] {new NumericField(0.5), new NumericField(0.8), new NumericField(0.0), new NominalField(4)}), ClassLabel.One},
-                {(new Field[] {new NumericField(0.2), new NumericField(0.6), new NumericField(0.2), new NominalField(8)}), ClassLabel.Two},
-                {(new Field[] {new NumericField(0.6), new NumericField(0.9), new NumericField(0.1), new NominalField(4)}), ClassLabel.One},
-                {(new Field[] {new NumericField(0.8), new NumericField(0.4), new NumericField(0.1), new NominalField(8)}), ClassLabel.Two},
-                {(new Field[] {new NumericField(0.3), new NumericField(0.6), new NumericField(0.2), new NominalField(4)}), ClassLabel.One},
-                {(new Field[] {new NumericField(0.5), new NumericField(0.4), new NumericField(0.3), new NominalField(4)}), ClassLabel.One},
-                {(new Field[] {new NumericField(0.1), new NumericField(0.9), new NumericField(0.7), new NominalField(8)}), ClassLabel.Two},
-                {(new Field[] {new NumericField(1.0), new NumericField(0.5), new NumericField(0.5), new NominalField(8)}), ClassLabel.Two}
+                {(new Field[] {new NumericField(0.3), new NumericField(0.5), new NumericField(0.1), new NominalField(4)}), ClassLabel.True},
+                {(new Field[] {new NumericField(0.7), new NumericField(0.2), new NumericField(0.7), new NominalField(4)}), ClassLabel.True},
+                {(new Field[] {new NumericField(0.1), new NumericField(0.4), new NumericField(0.2), new NominalField(8)}), ClassLabel.False},
+                {(new Field[] {new NumericField(0.5), new NumericField(0.8), new NumericField(0.0), new NominalField(4)}), ClassLabel.True},
+                {(new Field[] {new NumericField(0.2), new NumericField(0.6), new NumericField(0.2), new NominalField(8)}), ClassLabel.False},
+                {(new Field[] {new NumericField(0.6), new NumericField(0.9), new NumericField(0.1), new NominalField(4)}), ClassLabel.True},
+                {(new Field[] {new NumericField(0.8), new NumericField(0.4), new NumericField(0.1), new NominalField(8)}), ClassLabel.False},
+                {(new Field[] {new NumericField(0.3), new NumericField(0.6), new NumericField(0.2), new NominalField(4)}), ClassLabel.True},
+                {(new Field[] {new NumericField(0.5), new NumericField(0.4), new NumericField(0.3), new NominalField(4)}), ClassLabel.True},
+                {(new Field[] {new NumericField(0.1), new NumericField(0.9), new NumericField(0.7), new NominalField(8)}), ClassLabel.False},
+                {(new Field[] {new NumericField(1.0), new NumericField(0.5), new NumericField(0.5), new NominalField(8)}), ClassLabel.False}
             };
 
         public static Dictionary<Field[], ClassLabel> Test = new Dictionary<Field[], ClassLabel>
             {
-                {(new Field[] {new NumericField(0.4), new NumericField(0.8), new NumericField(0.4), new NominalField(4)}), ClassLabel.One},
-                {(new Field[] {new NumericField(0.5), new NumericField(0.0), new NumericField(0.9), new NominalField(8)}), ClassLabel.Two}
+                {(new Field[] {new NumericField(0.4), new NumericField(0.8), new NumericField(0.4), new NominalField(4)}), ClassLabel.True},
+                {(new Field[] {new NumericField(0.5), new NumericField(0.0), new NumericField(0.9), new NominalField(8)}), ClassLabel.False}
             };
 
         readonly Random rand = new Random();

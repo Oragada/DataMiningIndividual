@@ -43,7 +43,6 @@ namespace IndividualAssignment
             }
             Dictionary<KeyValuePair<int[], int[]>, float> results = APriori.RunAPriori(0.15f, 0.70f, data);
             WriteAPrioriResults(results);
-
         }
 
         private void WriteAPrioriResults(Dictionary<KeyValuePair<int[], int[]>, float> results)
@@ -91,9 +90,6 @@ namespace IndividualAssignment
         {
             Dictionary<Field[], ClassLabel>[] dataFields = CreateFieldsForKNN(cleanData);
 
-            Dictionary<Field[], ClassLabel> training = new Dictionary<Field[], ClassLabel>();
-            Dictionary<Field[], ClassLabel> test = new Dictionary<Field[], ClassLabel>();
-
             kNN knn = new kNN();
 
             foreach (KeyValuePair<Field[], ClassLabel> tuple in dataFields[0])
@@ -114,26 +110,32 @@ namespace IndividualAssignment
             returnFormula[0] = new Dictionary<Field[], ClassLabel>();
             returnFormula[1] = new Dictionary<Field[], ClassLabel>();
 
-
-
             foreach (CleanDataPoint point in cleanData)
             {
-                int trainingOrTest = (rand.Next(0, 5) == 0 ? 0 : 1);
-                Field[] dataFields = new Field[0];
+                int trainingOrTest = (rand.Next(0, 5) == 0 ? 1 : 0);
+
+                Field[] dataFields = new Field[4];
                 //TODO Generate Field variables
+
                 List<int> ages = cleanData.Select(e => e.Age).ToList();
-                dataFields[0] = new NumericField((point.Age - ages.Min()) / (ages.Max() - ages.Min()));
-                IEnumerable<int> progSkill = cleanData.Select(e => e.ProgrammingSkill);
-                dataFields[1] = new NumericField((point.ProgrammingSkill - progSkill.Min()) / (progSkill.Max() - progSkill.Min()));
+                dataFields[0] = new NumericField(((double)point.Age - ages.Min()) / (ages.Max() - ages.Min()));
 
+                List<int> progSkill = cleanData.Select(e => e.ProgrammingSkill).ToList();
+                dataFields[1] = new NumericField(((double)point.ProgrammingSkill - progSkill.Min()) / (progSkill.Max() - progSkill.Min()));
 
+                List<int> uni = cleanData.Select(e => e.UniYears).ToList();
+                dataFields[2] = new NumericField(((double)point.UniYears - 0) / (uni.Max() - 0));
 
-                ClassLabel cL = ClassLabel.One;
+                dataFields[3] = new NumericField(((double)point.EngSkill - 45) / (69 - 45));
+
                 //TODO Generate ClassLabel
+                ClassLabel cL = point.NN_SVM ? ClassLabel.True : ClassLabel.False;
 
 
                 returnFormula[trainingOrTest].Add(dataFields, cL);
             }
+
+            return returnFormula;
         }
     }
 }

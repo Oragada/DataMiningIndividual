@@ -11,6 +11,22 @@ namespace IndividualAssignment
         /*
         static void Main(string[] args)
         {
+            List<string[]> data = ExtractData();
+
+            List<CleanDataPoint> cleanData = data.Select(CleanDataPoint.Clean).ToList();
+
+            Analysis ana = new Analysis();
+
+            ana.RunAPriori(cleanData);
+
+            PrintProgLangs(cleanData);
+
+            Console.ReadKey();
+        }
+        */
+
+        private static List<string[]> ExtractData()
+        {
             List<string[]> data = new List<string[]>();
 
             var reader = new StreamReader(File.OpenRead(@"../../Data_Mining_Student_DataSet_Spring_2013_Fixed.csv"));
@@ -21,29 +37,14 @@ namespace IndividualAssignment
                 string line = reader.ReadLine();
                 string[] values = line.Split(';');
                 //If there is not the required number of fields, the data point is discarded
-                if (values.Length != 25) continue; 
+                if (values.Length != 25) continue;
                 data.Add(values.Take(25).ToArray());
-
             }
 
-            //foreach (string[] stringse in data)
-            //{
-            //    Console.WriteLine(stringse[17]);
-            //}
-
-            List<CleanDataPoint> cleanData = data.Select(CleanDataPoint.Clean).ToList();
-
-            Analysis ana = new Analysis();
-
-            ana.RunAPriori(cleanData);
-
-            PrintData(cleanData);
-
-            Console.ReadKey();
-
+            return data;
         }
 
-        private static void PrintData(List<CleanDataPoint> cleanData)
+        private static void PrintProgLangs(List<CleanDataPoint> cleanData)
         {
             foreach (CleanDataPoint cleanDataPoint in cleanData)
             {
@@ -51,12 +52,17 @@ namespace IndividualAssignment
                 Console.WriteLine();
             }
         }
-        */
 
+        
         static void Main(string[] args)
         {
+            List<string[]> data = ExtractData();
+
+            List<CleanDataPoint> cleanData = data.Select(CleanDataPoint.Clean).ToList();
+
             Analysis ana = new Analysis();
-            ana.RunKNN(new List<CleanDataPoint>());
+          
+            ana.RunKNN(cleanData);
         }
     }
 }
