@@ -7,7 +7,8 @@ using System.IO;
 namespace IndividualAssignment
 {
     class Program
-    { 
+    {
+        /*
         static void Main(string[] args)
         {
             List<string[]> data = new List<string[]>();
@@ -50,10 +51,12 @@ namespace IndividualAssignment
                 Console.WriteLine();
             }
         }
+        */
 
-        /*static void Main(string[] args)
+        static void Main(string[] args)
         {
-            Dictionary<KeyValuePair<int[], int[]>, float> results = APriori.RunAPriori(0.2f, 0.60f,APriori.TRANSACTIONS);
-        }*/
+            Analysis ana = new Analysis();
+            ana.RunKNN(new List<CleanDataPoint>());
+        }
     }
 }

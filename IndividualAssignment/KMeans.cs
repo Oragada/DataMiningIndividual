@@ -88,7 +88,13 @@ namespace IndividualAssignment
 
         private double calculateDistance(double[] center, double[] dataPoint)
         {
-            throw new NotImplementedException();
+            //assume that the arrays are of equal length
+            double val = 0;
+            for (int i = 0; i < center.Length; i++)
+            {
+                val += Math.Pow(center[i] - dataPoint[i], 2);
+            }
+            return Math.Sqrt(val);
         }
     }
 

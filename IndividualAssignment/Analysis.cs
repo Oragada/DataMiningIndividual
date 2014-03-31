@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -10,7 +11,7 @@ namespace IndividualAssignment
         private static readonly Dictionary<OS, int> osInt = new Dictionary<OS, int>();
         private static readonly Dictionary<ProgrammingLanguage, int> progLangInt = new Dictionary<ProgrammingLanguage, int>();
         private static readonly Dictionary<SQL, int> sqlInt = new Dictionary<SQL, int>();
-
+        private static readonly Random rand = new Random();
 
         public Analysis()
         {
@@ -40,7 +41,7 @@ namespace IndividualAssignment
                 dataPoint.AddRange(cdp.ProgLang.Select(lang => progLangInt[lang]));
                 data.Add(dataPoint);
             }
-            Dictionary<KeyValuePair<int[], int[]>, float> results = APriori.RunAPriori(0.20f, 0.50f, data);
+            Dictionary<KeyValuePair<int[], int[]>, float> results = APriori.RunAPriori(0.15f, 0.70f, data);
             WriteAPrioriResults(results);
 
         }
@@ -83,7 +84,56 @@ namespace IndividualAssignment
                 return progLangInt.First(e => e.Value == i).Key.ToString();
             }
 
-            throw new NotImplementedException();
+            throw new InvalidDataException();
+        }
+
+        public void RunKNN(List<CleanDataPoint> cleanData)
+        {
+            Dictionary<Field[], ClassLabel>[] dataFields = CreateFieldsForKNN(cleanData);
+
+            Dictionary<Field[], ClassLabel> training = new Dictionary<Field[], ClassLabel>();
+            Dictionary<Field[], ClassLabel> test = new Dictionary<Field[], ClassLabel>();
+
+            kNN knn = new kNN();
+
+            foreach (KeyValuePair<Field[], ClassLabel> tuple in dataFields[0])
+            {
+                knn.AddTrainingTuple(tuple.Key,tuple.Value);
+            }
+            foreach (KeyValuePair<Field[], ClassLabel> tuple in dataFields[1])
+            {
+                ClassLabel knnResult = knn.TestTuple(3, tuple.Key);
+                Console.WriteLine("kNN: {0} - real: {1}", knnResult, tuple.Value);
+            }
+            Console.ReadLine();
+        }
+
+        private static Dictionary<Field[], ClassLabel>[] CreateFieldsForKNN(List<CleanDataPoint> cleanData)
+        {
+            Dictionary<Field[], ClassLabel>[] returnFormula = new Dictionary<Field[], ClassLabel>[2];
+            returnFormula[0] = new Dictionary<Field[], ClassLabel>();
+            returnFormula[1] = new Dictionary<Field[], ClassLabel>();
+
+
+
+            foreach (CleanDataPoint point in cleanData)
+            {
+                int trainingOrTest = (rand.Next(0, 5) == 0 ? 0 : 1);
+                Field[] dataFields = new Field[0];
+                //TODO Generate Field variables
+                List<int> ages = cleanData.Select(e => e.Age).ToList();
+                dataFields[0] = new NumericField((point.Age - ages.Min()) / (ages.Max() - ages.Min()));
+                IEnumerable<int> progSkill = cleanData.Select(e => e.ProgrammingSkill);
+                dataFields[1] = new NumericField((point.ProgrammingSkill - progSkill.Min()) / (progSkill.Max() - progSkill.Min()));
+
+
+
+                ClassLabel cL = ClassLabel.One;
+                //TODO Generate ClassLabel
+
+
+                returnFormula[trainingOrTest].Add(dataFields, cL);
+            }
         }
     }
 }

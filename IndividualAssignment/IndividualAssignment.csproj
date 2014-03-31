@@ -46,7 +46,10 @@
     <Compile Include="Analysis.cs" />
     <Compile Include="APriori.cs" />
     <Compile Include="CleanDataPoint.cs" />
+    <Compile Include="Field.cs" />
+    <Compile Include="ID3.cs" />
     <Compile Include="KMeans.cs" />
+    <Compile Include="kNN.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
