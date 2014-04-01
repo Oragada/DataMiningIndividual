@@ -52,8 +52,8 @@ namespace IndividualAssignment
                 Console.WriteLine();
             }
         }
-
-        
+        /*
+        //kNN
         static void Main(string[] args)
         {
             List<string[]> data = ExtractData();
@@ -63,6 +63,17 @@ namespace IndividualAssignment
             Analysis ana = new Analysis();
           
             ana.RunKNN(cleanData);
+        }
+        */
+        static void Main(string[] args)
+        {
+            List<string[]> data = ExtractData();
+
+            List<CleanDataPoint> cleanData = data.Select(CleanDataPoint.Clean).ToList();
+
+            Analysis ana = new Analysis();
+            
+            ana.RunKMeans(cleanData);
         }
     }
 }

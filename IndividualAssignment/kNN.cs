@@ -32,14 +32,18 @@ namespace IndividualAssignment
 
         public Dictionary<Field[], ClassLabel> Data;
 
+        public Dictionary<ClassLabel, int> Distribution; 
+
         public kNN()
         {
             Data = new Dictionary<Field[], ClassLabel>();
+            Distribution = new Dictionary<ClassLabel, int> {{ClassLabel.False, 0}, {ClassLabel.True, 0}};
         }
 
         public void AddTrainingTuple(Field[] dataPoint, ClassLabel label)
         {
             Data.Add(dataPoint,label);
+            Distribution[label] += 1;
         }
 
         public ClassLabel TestTuple(int k, Field[] dataPoint)
@@ -61,13 +65,21 @@ namespace IndividualAssignment
                     counts.Add(label, 1);
                 }
             }
+            /*
+            double val = ((double) labels.Count(e => e == ClassLabel.False)/k) - GetDistribution()[0];
+
+            return (val < 0 ? ClassLabel.True : ClassLabel.False);
+            */
+            
             //Find labels with maximum
             List<ClassLabel> maxLabels = counts.Where(e => e.Value == counts.Values.Max()).Select(e => e.Key).ToList();
+
             //If multiple maximums, select one at random
             return maxLabels.Count() > 1 ? maxLabels[rand.Next(0, maxLabels.Count)] : maxLabels.First();
+            
         }
 
-        List<Field[]> FindKNearestNeighbors(int k, Field[] newDataPoint)
+        private List<Field[]> FindKNearestNeighbors(int k, Field[] newDataPoint)
         {
             Dictionary<Field[], double> distances = Data.Keys.ToDictionary(e => e, dp => FindDistance(dp, newDataPoint));
             //find the k lowest values
@@ -108,6 +120,14 @@ namespace IndividualAssignment
                 sum += Math.Pow(Math.Abs(first[i].GetDistance(second[i])),2);
             }
             return Math.Sqrt(sum);
+        }
+
+        private double[] GetDistribution()
+        {
+            double[] distPerc = new double[2];
+            distPerc[0] = (double)Distribution[ClassLabel.False] / Distribution.Sum(e => e.Value);
+            distPerc[1] = (double)Distribution[ClassLabel.True] / Distribution.Sum(e => e.Value);
+            return distPerc;
         }
     }
 }

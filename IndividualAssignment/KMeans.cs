@@ -9,11 +9,12 @@ namespace IndividualAssignment
     {
         private List<double[]> dataset;
         private List<KMCluster> clusters; 
-        private Random rand = new Random();
+        private Random rand = new Random(1337);
 
         public KMeans(List<double[]> dataset, int clusterSize)
         {
             this.dataset = dataset;
+            clusters = new List<KMCluster>();
 
             int[] startIndexes = new int[clusterSize];
             //initialising
@@ -39,15 +40,19 @@ namespace IndividualAssignment
                 clusters.Add(new KMCluster(dataset[t]));
             }
 
-            KMeanAlgorithm();
+            //KMeanAlgorithm();
         }
 
-        private void KMeanAlgorithm()
+        public List<KMCluster> KMeanAlgorithm()
         {
             bool changed;
             do
             {
                 changed = false;
+                foreach (KMCluster kmCluster in clusters)
+                {
+                    kmCluster.clusterContent = new List<double[]>();
+                }
 
                 //Assign all iris to empty clusters
                 foreach (double[] dataPoint in dataset)
@@ -78,12 +83,12 @@ namespace IndividualAssignment
                     }
                     newClusters.Add(nCluster);
                 }
-
-
-
+                if (changed) { clusters = newClusters; }
+                
             } //if changed, run method again
             while (changed);
 
+            return clusters;
         }
 
         private double calculateDistance(double[] center, double[] dataPoint)
@@ -101,7 +106,7 @@ namespace IndividualAssignment
     class KMCluster : IEquatable<KMCluster>
     {
         public readonly double[] center;
-        private List<double[]> clusterContent;
+        public List<double[]> clusterContent;
 
         public KMCluster(double[] center)
         {

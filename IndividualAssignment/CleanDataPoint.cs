@@ -46,7 +46,7 @@ namespace IndividualAssignment
             int i = 0;
             CleanDataPoint dp = new CleanDataPoint
                                     {
-                                        Age = CleanAge(pointCon[i++]),
+                                        Age = CleanAge(pointCon[i++], pointCon[i]),
                                         Birth = CleanBirth(pointCon[i++]),
                                         ProgrammingSkill = CleanProgSkill(pointCon[i++]),
                                         UniYears = CleanUniYears(pointCon[i++]),
@@ -435,7 +435,7 @@ namespace IndividualAssignment
             string number = s.Split(' ')[0];
             bool addHalf = false;
             //change ',' to '.'
-            number = number.Replace(',', '.');
+            number = number.Replace('.', ',');
             if (number.EndsWith("½"))
             {
                 number = number.Substring(0, number.Length - 1);
@@ -492,11 +492,13 @@ namespace IndividualAssignment
             //throw new NotImplementedException();
         }
 
-        private static int CleanAge(string s)
+        private static int CleanAge(string s, string date)
         {
             if (s.Contains("-"))
             {
-                return -1;
+                //special case
+                return 22;
+                //return -1;
             }
 
             try
