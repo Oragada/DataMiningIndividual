@@ -28,7 +28,7 @@ namespace IndividualAssignment
                 {(new Field[] {new NumericField(0.5), new NumericField(0.0), new NumericField(0.9), new NominalField(8)}), ClassLabel.False}
             };
 
-        readonly Random rand = new Random();
+        readonly Random rand = new Random(1337);
 
         public Dictionary<Field[], ClassLabel> Data;
 

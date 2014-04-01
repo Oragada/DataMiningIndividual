@@ -497,7 +497,9 @@ namespace IndividualAssignment
             if (s.Contains("-"))
             {
                 //special case
-                return 22;
+                int yearOfBirth = Convert.ToInt32(date.Split('-').Last());
+                const int yearPaperWritten = 2013;
+                return yearPaperWritten - yearOfBirth;
                 //return -1;
             }
 

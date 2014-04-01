@@ -9,6 +9,7 @@ namespace IndividualAssignment
     class Program
     {
         /*
+        //A Priori
         static void Main(string[] args)
         {
             List<string[]> data = ExtractData();
@@ -19,9 +20,35 @@ namespace IndividualAssignment
 
             ana.RunAPriori(cleanData);
 
-            PrintProgLangs(cleanData);
+            //PrintProgLangs(cleanData);
 
             Console.ReadKey();
+        }
+        */
+        
+        //kNN
+        static void Main(string[] args)
+        {
+            List<string[]> data = ExtractData();
+
+            List<CleanDataPoint> cleanData = data.Select(CleanDataPoint.Clean).ToList();
+
+            Analysis ana = new Analysis();
+          
+            ana.RunKNN(cleanData);
+        }
+        
+        /*
+        //K-Means
+        static void Main(string[] args)
+        {
+            List<string[]> data = ExtractData();
+
+            List<CleanDataPoint> cleanData = data.Select(CleanDataPoint.Clean).ToList();
+
+            Analysis ana = new Analysis();
+            
+            ana.RunKMeans(cleanData);
         }
         */
 
@@ -51,29 +78,6 @@ namespace IndividualAssignment
                 Console.Write("{0}, {1}, {2}", cleanDataPoint.ProgLang[0], cleanDataPoint.ProgLang[1], cleanDataPoint.ProgLang[2]);
                 Console.WriteLine();
             }
-        }
-        /*
-        //kNN
-        static void Main(string[] args)
-        {
-            List<string[]> data = ExtractData();
-
-            List<CleanDataPoint> cleanData = data.Select(CleanDataPoint.Clean).ToList();
-
-            Analysis ana = new Analysis();
-          
-            ana.RunKNN(cleanData);
-        }
-        */
-        static void Main(string[] args)
-        {
-            List<string[]> data = ExtractData();
-
-            List<CleanDataPoint> cleanData = data.Select(CleanDataPoint.Clean).ToList();
-
-            Analysis ana = new Analysis();
-            
-            ana.RunKMeans(cleanData);
         }
     }
 }
